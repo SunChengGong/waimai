@@ -34,4 +34,11 @@ public interface EmployeeMapper {
      * 动态SQL
      */
     public List<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
+     * 更新员工信息
+     * @param employee
+     * dongtaisql
+     */
+    public void update(Employee employee);
 }
