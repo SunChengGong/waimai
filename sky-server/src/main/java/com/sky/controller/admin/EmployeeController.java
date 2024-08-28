@@ -104,11 +104,34 @@ public class EmployeeController {
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
     }
+
+    /**
+     * 启用禁用员工
+     * @param status
+     * @param id
+     * @return
+     */
     @PostMapping("/status/{status}")
     @ApiOperation("启用或禁用员工")
     public Result startOrStop(@PathVariable Integer status,Long id){
         log.info("启用或禁用员工：status={},id={}",status,id);
         employeeService.startOrStop(status,id);
+        return Result.success();
+    }
+    @GetMapping("/{id}")
+    @ApiOperation("根据ID查询员工")
+    public Result<Employee> getById(@PathVariable Long id){
+        log.info("根据ID查询员工：id={}",id);
+        Employee emp = employeeService.getById(id);
+        return Result.success(emp);
+
+    }
+    //TODO 接口文档测试有问题，如果只是指定某个值。其他值为空，会出现一条记录只有某个值
+    @PutMapping
+    @ApiOperation("修改员工信息")
+    public Result update(@RequestBody EmployeeDTO employeeDTO){
+        log.info("修改员工信息：{}",employeeDTO);
+        employeeService.update(employeeDTO);
         return Result.success();
     }
 
